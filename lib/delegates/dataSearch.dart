@@ -80,6 +80,9 @@ class DataSearch extends SearchDelegate<String> {
       );
     }
   }
+
+  @override
+  String get searchFieldLabel => "Pesquisar";
   
   Future<List> suggestions(String search) async {
     http.Response response = await http.get(
