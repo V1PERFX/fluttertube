@@ -1,8 +1,9 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertube/blocs/favoriteBloc.dart';
 import 'package:fluttertube/models/video.dart';
 
 class VideoTile extends StatelessWidget {
-
   final Video video;
 
   VideoTile(this.video);
@@ -15,8 +16,11 @@ class VideoTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           AspectRatio(
-            aspectRatio: 16/9,
-            child: Image.network(video.thumb, fit: BoxFit.cover,),
+            aspectRatio: 16 / 9,
+            child: Image.network(
+              video.thumb,
+              fit: BoxFit.cover,
+            ),
           ),
           Row(
             children: <Widget>[
@@ -48,12 +52,24 @@ class VideoTile extends StatelessWidget {
                   ],
                 ),
               ),
-              IconButton(
-                icon: Icon(Icons.star_border),
-                color: Colors.white,
-                iconSize: 30,
-                onPressed: (){
-
+              StreamBuilder<Map<String, Video>>(
+                stream: BlocProvider.of<FavoriteBloc>(context).outFav,
+                initialData: {},
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return IconButton(
+                      icon: Icon(snapshot.data.containsKey(video.id) ?
+                        Icons.star : Icons.star_border
+                      ),
+                      color: Colors.white,
+                      iconSize: 30,
+                      onPressed: () {
+                        BlocProvider.of<FavoriteBloc>(context).toggleFavorite(video);
+                      },
+                    );
+                  } else {
+                    return CircularProgressIndicator();
+                  }
                 },
               ),
             ],
