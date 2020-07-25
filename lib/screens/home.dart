@@ -4,6 +4,7 @@ import 'package:fluttertube/blocs/favoriteBloc.dart';
 import 'package:fluttertube/blocs/videosBloc.dart';
 import 'package:fluttertube/delegates/dataSearch.dart';
 import 'package:fluttertube/models/video.dart';
+import 'package:fluttertube/screens/favorites.dart';
 import 'package:fluttertube/widgets/videoTile.dart';
 
 class Home extends StatelessWidget {
@@ -22,9 +23,8 @@ class Home extends StatelessWidget {
             alignment: Alignment.center,
             child: StreamBuilder<Map<String, Video>>(
               stream: BlocProvider.of<FavoriteBloc>(context).outFav,
-              initialData: {},
               builder: (context, snapshot) {
-                if(snapshot.hasData) {
+                if (snapshot.hasData) {
                   return Text("${snapshot.data.length}");
                 } else {
                   return Container();
@@ -34,15 +34,17 @@ class Home extends StatelessWidget {
           ),
           IconButton(
             icon: Icon(Icons.star),
-            onPressed: (){
-
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => Favorites()));
             },
           ),
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () async {
-              String result = await showSearch(context: context, delegate: DataSearch());
-              if(result != null) {
+              String result =
+                  await showSearch(context: context, delegate: DataSearch());
+              if (result != null) {
                 BlocProvider.of<VideosBloc>(context).inSearch.add(result);
               }
             },
@@ -54,19 +56,20 @@ class Home extends StatelessWidget {
         initialData: [],
         stream: BlocProvider.of<VideosBloc>(context).outVideos,
         builder: (context, snapshot) {
-          if(snapshot.hasData) {
+          if (snapshot.hasData) {
             return ListView.builder(
               itemBuilder: (context, index) {
-                if(index < snapshot.data.length) {
+                if (index < snapshot.data.length) {
                   return VideoTile(snapshot.data[index]);
-                } else if(index > 1) {
+                } else if (index > 1) {
                   BlocProvider.of<VideosBloc>(context).inSearch.add(null);
                   return Container(
                     height: 40,
                     width: 40,
                     alignment: Alignment.center,
                     child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.redAccent[700]),
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(Colors.redAccent[700]),
                     ),
                   );
                 } else {
