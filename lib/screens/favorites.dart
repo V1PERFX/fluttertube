@@ -6,7 +6,6 @@ import 'package:fluttertube/blocs/favoriteBloc.dart';
 import 'package:fluttertube/models/video.dart';
 
 class Favorites extends StatelessWidget {
-  //BlocProvider.of<FavoriteBloc>(context)
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +24,7 @@ class Favorites extends StatelessWidget {
               return InkWell(
                 onTap: () {
                   FlutterYoutube.playYoutubeVideoById(
-                    apiKey: API_KEY, 
+                    apiKey: API_KEY,
                     videoId: vid.id,
                   );
                 },

@@ -6,16 +6,14 @@ const API_KEY = "place here key";
 // GET THE KEY OF YOUTUBE API v3 ON console.developers.google.com
 
 class Api {
-
   String _search;
   String _nextToken;
 
   Future<List<Video>> search(String search) async {
-
     _search = search;
 
     http.Response response = await http.get(
-      "https://www.googleapis.com/youtube/v3/search?part=snippet&q=$search&type=video&key=$API_KEY&maxResults=10"
+      "https://www.googleapis.com/youtube/v3/search?part=snippet&q=$search&type=video&key=$API_KEY&maxResults=10",
     );
 
     return decode(response);
@@ -23,23 +21,21 @@ class Api {
 
   Future<List<Video>> nextPage() async {
     http.Response response = await http.get(
-      "https://www.googleapis.com/youtube/v3/search?part=snippet&q=$_search&type=video&key=$API_KEY&maxResults=10&pageToken=$_nextToken"
+      "https://www.googleapis.com/youtube/v3/search?part=snippet&q=$_search&type=video&key=$API_KEY&maxResults=10&pageToken=$_nextToken",
     );
 
     return decode(response);
   }
 
   List<Video> decode(http.Response response) {
-    if(response.statusCode == 200) {
+    if (response.statusCode == 200) {
       var decoded = json.decode(response.body);
 
       _nextToken = decoded["nextPageToken"];
 
-      List<Video> videos = decoded["items"].map<Video>(
-        (map){
-          return Video.fromJson(map);
-        }
-      ).toList();
+      List<Video> videos = decoded["items"].map<Video>((map) {
+        return Video.fromJson(map);
+      }).toList();
 
       return videos;
     } else {

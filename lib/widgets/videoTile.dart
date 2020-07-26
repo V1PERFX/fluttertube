@@ -15,7 +15,7 @@ class VideoTile extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         FlutterYoutube.playYoutubeVideoById(
-          apiKey: API_KEY, 
+          apiKey: API_KEY,
           videoId: video.id,
         );
       },
