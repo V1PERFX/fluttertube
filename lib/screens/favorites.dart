@@ -34,60 +34,57 @@ class Favorites extends StatelessWidget {
                   onLongPress: () {
                     BlocProvider.of<FavoriteBloc>(context).toggleFavorite(vid);
                   },
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                  child: Row(
                     children: <Widget>[
-                      AspectRatio(
-                        aspectRatio: 16 / 9,
+                      Container(
+                        padding: EdgeInsets.only(top: 4),
+                        width: 100,
+                        height: 56,
                         child: Image.network(
                           vid.thumb,
                           fit: BoxFit.cover,
                         ),
                       ),
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
-                                  child: Text(
-                                    vid.title,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                    ),
-                                    maxLines: 2,
-                                  ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
+                              child: Text(
+                                vid.title,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.all(8),
-                                  child: Row(
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.account_circle,
-                                        color: Colors.grey,
-                                        size: 14,
-                                      ),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text(
-                                        vid.channel,
-                                        textAlign: TextAlign.end,
-                                        style: TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                                maxLines: 2,
+                              ),
                             ),
-                          ),
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8),
+                              child: Row(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.account_circle,
+                                    color: Colors.grey,
+                                    size: 14,
+                                  ),
+                                  SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text(
+                                    vid.channel,
+                                    textAlign: TextAlign.end,
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
