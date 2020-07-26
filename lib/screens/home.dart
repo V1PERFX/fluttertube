@@ -17,7 +17,7 @@ class Home extends StatelessWidget {
           child: Image.asset("images/ft_logo_rgb_dark.png"),
         ),
         elevation: 0,
-        backgroundColor: Colors.black87,
+        backgroundColor: Color.fromARGB(255, 32, 32, 32),
         actions: <Widget>[
           Align(
             alignment: Alignment.center,
@@ -51,7 +51,7 @@ class Home extends StatelessWidget {
           ),
         ],
       ),
-      backgroundColor: Colors.black87,
+      backgroundColor: Color.fromARGB(255, 24, 24, 24),
       body: StreamBuilder(
         initialData: [],
         stream: BlocProvider.of<VideosBloc>(context).outVideos,
