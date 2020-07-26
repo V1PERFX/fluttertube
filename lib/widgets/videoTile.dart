@@ -50,12 +50,25 @@ class VideoTile extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.all(8),
-                        child: Text(
-                          video.channel,
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14,
-                          ),
+                        child: Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.account_circle,
+                              color: Colors.grey,
+                              size: 14,
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Text(
+                              video.channel,
+                              textAlign: TextAlign.end,
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -78,8 +91,8 @@ class VideoTile extends StatelessWidget {
                       );
                     } else {
                       return CircularProgressIndicator(
-                        valueColor:
-                          AlwaysStoppedAnimation<Color>(Colors.redAccent[700]),
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.redAccent[700]),
                       );
                     }
                   },

@@ -12,47 +12,89 @@ class Favorites extends StatelessWidget {
       appBar: AppBar(
         title: Text("Favoritos"),
         centerTitle: true,
-        backgroundColor: Colors.black87,
+        backgroundColor: Color.fromARGB(255, 32, 32, 32),
       ),
-      backgroundColor: Colors.black87,
-      body: StreamBuilder<Map<String, Video>>(
-        stream: BlocProvider.of<FavoriteBloc>(context).outFav,
-        initialData: {},
-        builder: (contex, snapshot) {
-          return ListView(
-            children: snapshot.data.values.map((vid) {
-              return InkWell(
-                onTap: () {
-                  FlutterYoutube.playYoutubeVideoById(
-                    apiKey: API_KEY,
-                    videoId: vid.id,
-                  );
-                },
-                onLongPress: () {
-                  BlocProvider.of<FavoriteBloc>(context).toggleFavorite(vid);
-                },
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      width: 100,
-                      height: 50,
-                      child: Image.network(vid.thumb),
-                    ),
-                    Expanded(
-                      child: Text(
-                        vid.title,
-                        style: TextStyle(
-                          color: Colors.white70,
+      backgroundColor: Color.fromARGB(255, 24, 24, 24),
+      body: Container(
+        margin: EdgeInsets.symmetric(vertical: 6, horizontal: 4),
+        child: StreamBuilder<Map<String, Video>>(
+          stream: BlocProvider.of<FavoriteBloc>(context).outFav,
+          initialData: {},
+          builder: (contex, snapshot) {
+            return ListView(
+              children: snapshot.data.values.map((vid) {
+                return InkWell(
+                  onTap: () {
+                    FlutterYoutube.playYoutubeVideoById(
+                      apiKey: API_KEY,
+                      videoId: vid.id,
+                    );
+                  },
+                  onLongPress: () {
+                    BlocProvider.of<FavoriteBloc>(context).toggleFavorite(vid);
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      AspectRatio(
+                        aspectRatio: 16 / 9,
+                        child: Image.network(
+                          vid.thumb,
+                          fit: BoxFit.cover,
                         ),
-                        maxLines: 2,
                       ),
-                    ),
-                  ],
-                ),
-              );
-            }).toList(),
-          );
-        },
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
+                                  child: Text(
+                                    vid.title,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                    ),
+                                    maxLines: 2,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(8),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.account_circle,
+                                        color: Colors.grey,
+                                        size: 14,
+                                      ),
+                                      SizedBox(
+                                        width: 8,
+                                      ),
+                                      Text(
+                                        vid.channel,
+                                        textAlign: TextAlign.end,
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+            );
+          },
+        ),
       ),
     );
   }
