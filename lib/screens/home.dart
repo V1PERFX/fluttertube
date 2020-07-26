@@ -73,7 +73,32 @@ class Home extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return Container();
+                  return Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(top: 8, left: 8),
+                          child: Text(
+                            "Clique aqui para procurar vídeos",
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 8, right: 1),
+                          child: Icon(
+                            Icons.arrow_upward,
+                            size: 40,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
                 }
               },
               itemCount: snapshot.data.length + 1,
