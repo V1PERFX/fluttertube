@@ -77,7 +77,10 @@ class VideoTile extends StatelessWidget {
                         },
                       );
                     } else {
-                      return CircularProgressIndicator();
+                      return CircularProgressIndicator(
+                        valueColor:
+                          AlwaysStoppedAnimation<Color>(Colors.redAccent[700]),
+                      );
                     }
                   },
                 ),

@@ -60,7 +60,10 @@ class DataSearch extends SearchDelegate<String> {
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                valueColor:
+                  AlwaysStoppedAnimation<Color>(Colors.redAccent[700]),
+              ),
             );
           } else {
             return ListView.builder(
