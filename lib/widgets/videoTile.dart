@@ -17,6 +17,7 @@ class VideoTile extends StatelessWidget {
         FlutterYoutube.playYoutubeVideoById(
           apiKey: API_KEY,
           videoId: video.id,
+          autoPlay: true,
         );
       },
       child: Container(

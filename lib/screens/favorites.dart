@@ -28,6 +28,7 @@ class Favorites extends StatelessWidget {
                     FlutterYoutube.playYoutubeVideoById(
                       apiKey: API_KEY,
                       videoId: vid.id,
+                      autoPlay: true,
                     );
                   },
                   onLongPress: () {
